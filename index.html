@@ -1,0 +1,23 @@
+<script src = "/socket.io/socket.io.js"></script>
+<script>
+var socket = io.connect('http://localhost:8080');
+window.onload = function (){
+socket.disconnect();
+};
+//socket.emit('message', 'John');
+socket.on('hello', function(data){
+alert(data.hello);
+});
+function getName(first){
+var name = prompt('Як звати?', 'Гість');
+if(name){
+if(first)
+socket.emit('message', name);
+else
+socket.emit('new_message', name);
+}
+}
+</script>
+
+<button onclick = "getName(0)">Представся</button>
+<button onclick = "getName(1)">Змінити ім'я</button>
